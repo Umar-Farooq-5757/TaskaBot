@@ -5,12 +5,11 @@ import Sidebar from "./components/Sidebar.jsx";
 import ChatBox from "./components/ChatBox.jsx";
 import Credits from "./pages/Credits.jsx";
 import Community from "./pages/Community.jsx";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
 
 import { useAppContext } from "./context/AppContext.jsx";
 
 function App() {
-  const { isDark, isMinimized, setIsMinimized } = useAppContext();
+  const { isDark } = useAppContext();
   return (
     <main
       className={`flex h-screen w-screen transition-all ${
@@ -19,19 +18,6 @@ function App() {
           : "text-black bg-white"
       }`}
     >
-      <div className="relative p-1 md:hidden block">
-        <button
-        onClick={()=>setIsMinimized(false)}
-          className={`p-1 cursor-pointer rounded-full ${
-            isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-          }`}
-        >
-          <HiOutlineMenuAlt1
-            className="size-6 "
-            onClick={() => setIsMinimized(false)}
-          />
-        </button>
-      </div>
       <Sidebar />
       <Routes>
         <Route path="/" element={<ChatBox />} />

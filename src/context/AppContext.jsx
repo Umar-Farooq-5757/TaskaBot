@@ -3,13 +3,14 @@ const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
 
-  const [user, setUser] = useState("umar farooq");
   const [isDark, setIsDark] = useState(
     JSON.parse(localStorage.getItem("isDark")) || false
   );
+    const [isMinimized, setIsMinimized] = useState(false);
+  
 
 
-  const value = { user, isDark, setIsDark };
+  const value = {  isDark, setIsDark, isMinimized, setIsMinimized };
 
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

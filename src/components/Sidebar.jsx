@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { assets } from "../assets/assets.js";
-import { CiSearch,CiImageOn } from "react-icons/ci";
+import { CiSearch, CiImageOn } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { FiSun } from "react-icons/fi";
-import { IoMoonOutline } from "react-icons/io5";
+import { IoMoonOutline, IoCloseSharp } from "react-icons/io5";
 import "../App.css";
 
 const Sidebar = () => {
   const [search, setSearch] = useState("");
-  const { isDark, setIsDark } = useAppContext();
+  const { isDark, setIsDark, isSidebarOpen, setIsSidebarOpen } =
+    useAppContext();
 
-  {
-  }
   return (
     <aside
-      className={`border min-w-68 h-screen bg-red-500 py-3 px-3 flex flex-col justify-between ${
+      className={`border md:left-0 ${
+        isSidebarOpen ? "left-0" : "-left-68"
+      } transition-all min-w-68 h-screen py-3 px-3 flex md:relative absolute flex-col justify-between ${
         isDark
           ? "bg-gradient-to-b from-[#221f22] to-[#000000] text-white border-gray-800"
           : "text-black bg-white border-gray-300"
       }`}
     >
+      <button
+        onClick={() => setIsSidebarOpen(false)}
+        className={`close transition-all md:hidden block ${
+          isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"
+        } rounded-full p-1 cursor-pointer absolute right-2 top-1`}
+      >
+        <IoCloseSharp className="size-6" />
+      </button>
       <section className="flex flex-col gap-5">
         {/* Logo */}
         <div className="logo flex items-center gap-2">
@@ -60,22 +69,25 @@ const Sidebar = () => {
         >
           <p className="title text-sm">New Chat</p>
           <span className="time text-xs text-gray-500">3 hours ago</span>
-          <button className={`${isDark?'hover:bg-gray-800':'hover:bg-gray-200'} rounded-full cursor-pointer p-2 transition-all absolute right-3`}>
+          <button
+            className={`${
+              isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"
+            } rounded-full cursor-pointer p-2 transition-all absolute right-3`}
+          >
             <RiDeleteBin6Line className="size-4 hidden group-hover:block" />
           </button>
         </div>
       </section>
 
       <section className="flex flex-col gap-4">
-         {/* community images */}
+        {/* community images */}
         <div
-          className={`chat group relative cursor-pointer flex justify-start items-center border gap-2 ${
+          className={`chat group hover:scale-105 transition-all relative cursor-pointer flex justify-start items-center border gap-2 ${
             isDark ? "border-gray-800" : "border-gray-300"
           } rounded-md py-3 px-2`}
         >
-          <CiImageOn className="size-5"/>
+          <CiImageOn className="size-5" />
           <span className="time text-sm">Community Images</span>
-          
         </div>
 
         {/* theme changing */}
@@ -85,14 +97,22 @@ const Sidebar = () => {
           } rounded-md py-3 px-2`}
         >
           {/* <img className="size-7" src={assets.user_icon} alt="" /> */}
-          {isDark?<FiSun className="size-5"/>:<IoMoonOutline className="size-5"/>}
-         {isDark? <span className="time text-sm">Light Mode</span>: <span className="time text-sm">Dark Mode</span>}
+          {isDark ? (
+            <FiSun className="size-5" />
+          ) : (
+            <IoMoonOutline className="size-5" />
+          )}
+          {isDark ? (
+            <span className="time text-sm">Light Mode</span>
+          ) : (
+            <span className="time text-sm">Dark Mode</span>
+          )}
           <input
             type="checkbox"
             checked={isDark}
-            onChange={()=>{
-              setIsDark(!isDark)
-              localStorage.setItem('isDark',!isDark)
+            onChange={() => {
+              setIsDark(!isDark);
+              localStorage.setItem("isDark", !isDark);
             }}
             className="toggle absolute right-2 text-white bg-[#99a1af] border-[#99a1af] checked:bg-[#ec4e02] checked:border-[#ec4e02] checked:text-white"
           />
@@ -106,7 +126,11 @@ const Sidebar = () => {
         >
           <img className="size-7" src={assets.user_icon} alt="" />
           <span className="time font-semibold text-sm">Username here</span>
-          <button className={`${isDark?'hover:bg-gray-800':'hover:bg-gray-200'} rounded-full cursor-pointer p-2 transition-all absolute right-3`}>
+          <button
+            className={`${
+              isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"
+            } rounded-full cursor-pointer p-2 transition-all absolute right-3`}
+          >
             <IoIosLogOut className="size-6  hidden group-hover:block" />
           </button>
         </div>

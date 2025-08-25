@@ -2,10 +2,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
 * {
   font-family: "Outfit", sans-serif;
 }
-::-webkit-scrollbar{
-    display: none;
+::-webkit-scrollbar {
+  display: none;
+}
+::selection {
+  background-color: #ec4e02;
+  color: white;
 }

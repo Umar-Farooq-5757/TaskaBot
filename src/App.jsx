@@ -5,11 +5,12 @@ import Sidebar from "./components/Sidebar.jsx";
 import ChatBox from "./components/ChatBox.jsx";
 import Credits from "./pages/Credits.jsx";
 import Community from "./pages/Community.jsx";
+import { RiMenu2Fill } from "react-icons/ri";
 
 import { useAppContext } from "./context/AppContext.jsx";
 
 function App() {
-  const { isDark } = useAppContext();
+  const { isDark, setIsSidebarOpen } = useAppContext();
   return (
     <main
       className={`flex h-screen w-screen transition-all ${
@@ -18,6 +19,15 @@ function App() {
           : "text-black bg-white"
       }`}
     >
+
+
+          <RiMenu2Fill
+        onClick={() => setIsSidebarOpen(true)}
+        className={`size-7 m-2  rounded-full md:hidden block cursor-pointer`}
+      />
+
+
+
       <Sidebar />
       <Routes>
         <Route path="/" element={<ChatBox />} />

@@ -12,8 +12,8 @@ const ChatBox = () => {
     >
       {messages.length === 0 && (
         <>
-        <div className="logo flex mb-6 items-center gap-2">
-          <img className="size-16 select-none" src={assets.logo} alt="" />
+        <div className="logo flex mb-6 items-center gap-2 select-none">
+          <img className="size-16 " src={assets.logo} alt="" />
           <div className="flex flex-col justify-center">
             <h1 className="font-medium text-5xl">TaskaBot</h1>
             <p className="font-medium text-3xl text-[#ec4e02]">
@@ -21,7 +21,7 @@ const ChatBox = () => {
             </p>
           </div>
         </div>
-        <p className="text-[#99a1af] font-light text-6xl">Ask me anything.</p> 
+        <p className="text-[#99a1af] font-light text-6xl select-none">Ask me anything.</p> 
         </>
       )}
 
@@ -35,7 +35,7 @@ const ChatBox = () => {
           </select>
           <input className="outline-none" type="text" name="" id="" placeholder="Type your prompt here..." />
           </div>
-          <button className="cursor-pointer">
+          <button className="cursor-pointer select-none">
             <img src={assets.send_icon} alt="" />
           </button>
         </form>

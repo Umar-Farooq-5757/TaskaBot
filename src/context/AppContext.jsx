@@ -6,8 +6,16 @@ export const AppContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("isDark")) || false
   );
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
-  const value = { isDark, setIsDark, isSidebarOpen, setIsSidebarOpen };
+  const value = {
+    isDark,
+    setIsDark,
+    isSidebarOpen,
+    setIsSidebarOpen,
+    isAboutOpen,
+    setIsAboutOpen,
+  };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

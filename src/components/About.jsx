@@ -9,7 +9,7 @@ const About = () => {
   return (
     <div
       className={` ${
-        isAboutOpen ? "translate-x-0" : "translate-x-16"
+        isAboutOpen ? "translate-x-0" : "translate-x-16 fixed right-0"
       } transition-all min-h-[30rem] ${
         isDark ? "bg-[#251812]" : "bg-[#fdede5]"
       } self-center flex flex-col justify-center gap-8 px-2 rounded-l-3xl border border-[#ec4e02] `}

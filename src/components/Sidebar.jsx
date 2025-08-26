@@ -16,8 +16,8 @@ const Sidebar = () => {
   return (
     <aside
       className={`border md:left-0 ${
-        isSidebarOpen ? "left-0" : "-left-68"
-      } transition-all min-w-68 h-screen py-3 px-3 flex md:relative absolute flex-col justify-between ${
+        isSidebarOpen ? "left-0 " : "-left-68"
+      } transition-all min-w-68 h-screen py-3 px-3 z-50 flex md:relative absolute flex-col justify-between ${
         isDark
           ? "bg-gradient-to-b from-[#221f22] to-[#000000] text-white border-gray-800"
           : "text-black bg-white border-gray-300"
@@ -27,7 +27,7 @@ const Sidebar = () => {
         onClick={() => setIsSidebarOpen(false)}
         className={`close transition-all md:hidden block ${
           isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-        } rounded-full p-1 cursor-pointer absolute right-2 top-1`}
+        } rounded-full p-1 cursor-pointer absolute right-2 top-1 `}
       >
         <IoCloseSharp className="size-6" />
       </button>

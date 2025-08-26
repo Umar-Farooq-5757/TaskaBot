@@ -23,7 +23,7 @@ function App() {
     >
       <RiMenu2Fill
         onClick={() => setIsSidebarOpen(true)}
-        className={`size-7 m-2  rounded-full md:hidden block cursor-pointer`}
+        className={`size-7 m-2 rounded-full md:hidden block cursor-pointer`}
       />
 
       <Sidebar />
@@ -32,7 +32,7 @@ function App() {
         <Route path="/credits" element={<Credits />} />
         <Route path="/community" element={<Community />} />
       </Routes>
-      <FcAbout onClick={()=>setIsAboutOpen(!isAboutOpen)} className="size-7 fixed right-4 top-3 cursor-pointer" />
+      <FcAbout onClick={()=>setIsAboutOpen(!isAboutOpen)} className=" size-7 fixed right-4 top-3 cursor-pointer" />
       <About/>
     </main>
   );

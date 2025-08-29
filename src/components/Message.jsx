@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import Markdown from "react-markdown";
 
 const Message = ({ message }) => {
   return (
@@ -18,8 +19,8 @@ const Message = ({ message }) => {
           alt=""
         />
       ) : (
-        <div className="self-start mr-24 bg-[#fdede5] p-2 border border-[#ec4e02] rounded-md text-sm">
-          <p className="mb-1">{message.content}</p>
+        <div className="self-start mr-24 bg-[#fdede5] p-2 border reset-tw border-[#ec4e02] rounded-md text-sm">
+          <p className="mb-1"><Markdown>{message.content}</Markdown></p>
            <span className="text-xs  text-gray-500">
             {moment(message.timestamp).fromNow()}
           </span>

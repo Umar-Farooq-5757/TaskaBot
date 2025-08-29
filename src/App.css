@@ -12,3 +12,6 @@
   background-color: #ec4e02;
   color: white;
 }
+.reset-tw :not(pre):not(code){
+all: revert;
+}

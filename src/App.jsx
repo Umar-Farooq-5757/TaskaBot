@@ -8,6 +8,7 @@ import Community from "./pages/Community.jsx";
 import About from "./components/About.jsx";
 import { RiMenu2Fill } from "react-icons/ri";
 import { FcAbout } from "react-icons/fc";
+import './assets/prism.css'
 
 import { useAppContext } from "./context/AppContext.jsx";
 

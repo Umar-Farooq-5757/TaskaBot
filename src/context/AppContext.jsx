@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from "react";
+import { dummyChats, dummyUserData } from "../assets/assets";
+
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
@@ -8,6 +10,12 @@ export const AppContextProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
+  // Initialize state directly with dummy data
+  const [user, setUser] = useState(dummyUserData);
+  const [chats, setChats] = useState(dummyChats);
+  const [selectedChat, setSelectedChat] = useState(dummyChats[1]);
+  const [messages, setMessages] = useState(selectedChat?.messages || []);
+
   const value = {
     isDark,
     setIsDark,
@@ -15,6 +23,14 @@ export const AppContextProvider = ({ children }) => {
     setIsSidebarOpen,
     isAboutOpen,
     setIsAboutOpen,
+    selectedChat,
+    setSelectedChat,
+    chats,
+    setChats,
+    user,
+    setUser,
+    messages,
+    setMessages,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

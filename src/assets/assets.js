@@ -31,8 +31,8 @@ export const assets = {
 
 export const dummyUserData = {
     "_id": "689c6deed410acddc0d95a0e",
-    "name": "GreatStack",
-    "email": "admin@example.com",
+    "name": "Umar Farooq",
+    "email": "aamirgel17@gmail.com",
     "password": "$2b$10$VESVdPDjL5LF.KCU6jKyqeXNSLASAAfpR2kkIJExtMO.PJvZJAudy",
     "credits": 200,
 }
@@ -68,7 +68,7 @@ export const dummyChats = [
         "_id": "689de4bbaa932dc3a8ef6cd7",
         "userId": "689c6deed410acddc0d95a0e",
         "userName": "GreatStack",
-        "name": "New Chat",
+        "name": "New Chat1",
         "messages": [
             {
                 "isImage": false,
@@ -91,7 +91,7 @@ export const dummyChats = [
     {
         "_id": "689ccb9016a922dd57a23fce",
         "userId": "689c6deed410acddc0d95a0e",
-        "name": "New Chat",
+        "name": "New Chat2",
         "messages": [
             {
                 "isImage": false,
@@ -256,7 +256,7 @@ export const dummyChats = [
     {
         "_id": Date.now(),
         "userId": "gs123456789",
-        "name": "New Chat",
+        "name": "New Chat3",
         "userName": "GreatStack",
         "messages": [],
         "createdAt": "2025-08-13T17:29:52.421Z",

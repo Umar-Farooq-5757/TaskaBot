@@ -7,12 +7,21 @@ import { IoIosLogOut } from "react-icons/io";
 import { FiSun } from "react-icons/fi";
 import { IoMoonOutline, IoCloseSharp } from "react-icons/io5";
 import "../App.css";
+import moment from "moment";
 
 const Sidebar = () => {
   const [search, setSearch] = useState("");
-  const { isDark, setIsDark, isSidebarOpen, setIsSidebarOpen } =
-    useAppContext();
-
+  const {
+    isDark,
+    setIsDark,
+    isSidebarOpen,
+    setIsSidebarOpen,
+    messages,
+    setMessages,
+    chats,
+    setChats,
+    user,
+  } = useAppContext();
   return (
     <aside
       className={`border md:left-0 ${
@@ -57,26 +66,42 @@ const Sidebar = () => {
             name=""
             id=""
             placeholder="Search chats..."
+            onChange={(e)=>setSearch(e.target.value)}
+            value={search}
           />
         </div>
 
         {/* Recent Chats */}
-        <h2 className="text-sm my-0 ">Recent chats</h2>
-        <div
-          className={`chat group relative cursor-pointer flex flex-col justify-center border ${
-            isDark ? "border-gray-800" : "border-gray-300"
-          } rounded-md py-1 pl-4`}
-        >
-          <p className="title text-sm">New Chat</p>
-          <span className="time text-xs text-gray-500">3 hours ago</span>
-          <button
-            className={`${
-              isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-            } rounded-full cursor-pointer p-2 transition-all absolute right-3`}
-          >
-            <RiDeleteBin6Line className="size-4 hidden group-hover:block" />
-          </button>
-        </div>
+        {messages.length > 0 && <h2 className="text-sm my-0 ">Recent chats</h2>}
+        {chats
+          .filter((chat) => {
+            // Find the text to search in: either the first message content or the chat name
+            const searchText = chat.messages?.[0]?.content || chat.name || "";
+            // Return true if the search text includes the search term (case-insensitive)
+            return searchText.toLowerCase().includes(search.toLowerCase());
+          })
+          .map((chat, index) => {
+            return (
+              <div
+                key={index}
+                className={`chat group relative cursor-pointer flex flex-col justify-center border ${
+                  isDark ? "border-gray-800" : "border-gray-300"
+                } rounded-md py-1 pl-4`}
+              >
+                <p className="title text-sm">{chat.name}</p>
+                <span className="time text-xs text-gray-500">{moment(chat.updatedAt).fromNow()}</span>
+                <button
+                  className={`${
+                    isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                  } rounded-full cursor-pointer p-2 transition-all absolute right-3`}
+                >
+                  <RiDeleteBin6Line className="size-4 hidden group-hover:block" />
+                </button>
+              </div>
+            );
+          })}
+
+     
       </section>
 
       <section className="flex flex-col gap-4">
@@ -125,7 +150,7 @@ const Sidebar = () => {
           } rounded-md py-3 px-2`}
         >
           <img className="size-7" src={assets.user_icon} alt="" />
-          <span className="time font-semibold text-sm">Username here</span>
+          <span className="time font-semibold text-sm">{user.name}</span>
           <button
             className={`${
               isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"

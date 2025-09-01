@@ -7,6 +7,10 @@ const ChatBox = () => {
   const { setIsSidebarOpen, isDark, selectedChat, setSelectedChat } =
     useAppContext();
   const [messages, setMessages] = useState([]);
+  const [prompt, setPrompt] = useState("");
+  const [mode, setMode] = useState("text");
+  const [isPublished, setIsPublished] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (selectedChat) {
@@ -15,7 +19,7 @@ const ChatBox = () => {
   }, [selectedChat]);
 
   return (
-    <section className="flex flex-col items-center gap-16">
+    <section className="flex flex-col items-center grow gap-16 w-full">
       <div
         onClick={() => setIsSidebarOpen(false)}
         className="items-center transition-all relative pr-9 sm:pr-4 md:pr-0 grow flex flex-col justify-center sm:-pr-10"
@@ -36,40 +40,59 @@ const ChatBox = () => {
             </p>
           </>
         ) : (
-          <div className="flex flex-col gap-3 items-center h-[80vh] overflow-auto my-10 px-20">
+          <div className="flex flex-col items-center w-[78vw] grow gap-3 h-[82vh] overflow-auto my-10 px-20">
             {messages.map((message, index) => {
               return <Message key={index} message={message} />;
             })}
+            {loading && (
+              <div className="loader mt-2 flex items-center gap-1.5 self-start">
+                <div className="size-1.5 rounded-full bg-gray-500 animate-bounce"></div>
+                <div className="size-1.5 rounded-full bg-gray-500 animate-bounce"></div>
+                <div className="size-1.5 rounded-full bg-gray-500 animate-bounce"></div>
+              </div>
+            )}
           </div>
         )}
       </div>
 
-        {/* Prompt box */}
-        {/* <div> */}
-        <form
-          onClick={(e) => e.preventDefault()}
-          className={` ${
-            isDark ? "bg-[#251812]" : "bg-[#fdede5]"
-          } pl-3 sm:pl-5 flex items-center justify-between py-2 px-2 border sticky bottom-12 w-[100%] sm:w-[85%] lg:w-[75%] md:w-[90%]  border-[#ec4e02] rounded-4xl justify-self-end`}
-        >
-          <div className="flex items-center justify-start gap-2 outline-none border-none">
-            <select name="" id="" className="text-sm sm:text-md">
-              <option value="text">Text</option>
-              <option value="image">Image</option>
-            </select>
-            <input
-              className="outline-none placeholder:text-sm sm:placeholder:text-md"
-              type="text"
-              name=""
-              id=""
-              placeholder="Type your prompt here..."
-            />
-          </div>
-          <button className="cursor-pointer select-none">
-            <img className="size-7 sm:size-9" src={assets.send_icon} alt="" />
-          </button>
-        </form>
-        {/* </div> */}
+      {/* Prompt box */}
+      {/* <div> */}
+      <form
+        onClick={(e) => e.preventDefault()}
+        className={` ${
+          isDark ? "bg-[#251812]" : "bg-[#fdede5]"
+        } pl-3 sm:pl-5 flex items-center justify-between py-2 px-2 border sticky bottom-12 w-[100%] sm:w-[85%] lg:w-[75%] md:w-[90%]  border-[#ec4e02] rounded-4xl justify-self-end`}
+      >
+        <div className="flex items-center justify-start gap-2 outline-none border-none">
+          <select
+            value={mode}
+            onChange={(e) => setMode(e.target.value)}
+            name=""
+            id=""
+            className="text-sm sm:text-md"
+          >
+            <option value="text">Text</option>
+            <option value="image">Image</option>
+          </select>
+          <input
+            className="outline-none placeholder:text-sm sm:placeholder:text-md"
+            type="text"
+            name=""
+            id=""
+            placeholder="Type your prompt here..."
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+        </div>
+        <button disabled={loading} className="cursor-pointer select-none">
+          <img
+            className="size-7 sm:size-9"
+            src={loading ? assets.stop_icon : assets.send_icon}
+            alt=""
+          />
+        </button>
+      </form>
+      {/* </div> */}
     </section>
   );
 };

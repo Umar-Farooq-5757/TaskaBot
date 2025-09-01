@@ -8,8 +8,10 @@ import { FiSun } from "react-icons/fi";
 import { IoMoonOutline, IoCloseSharp } from "react-icons/io5";
 import "../App.css";
 import moment from "moment";
+import {  useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate()
   const [search, setSearch] = useState("");
   const {
     isDark,
@@ -107,6 +109,7 @@ const Sidebar = () => {
       <section className="flex flex-col gap-4">
         {/* community images */}
         <div
+        onClick={()=>navigate('/community')}
           className={`chat group hover:scale-105 transition-all relative cursor-pointer flex justify-start items-center border gap-2 ${
             isDark ? "border-gray-800" : "border-gray-300"
           } rounded-md py-3 px-2`}

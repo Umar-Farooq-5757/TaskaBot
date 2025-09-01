@@ -10,7 +10,6 @@ export const AppContextProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
-  // Initialize state directly with dummy data
   const [user, setUser] = useState(dummyUserData);
   const [chats, setChats] = useState(dummyChats);
   const [selectedChat, setSelectedChat] = useState(dummyChats[1]);

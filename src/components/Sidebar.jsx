@@ -44,7 +44,7 @@ const Sidebar = () => {
       </button>
       <section className="flex flex-col gap-5">
         {/* Logo */}
-        <div className="logo flex items-center gap-2">
+        <div onClick={()=>navigate('/')} className="logo cursor-pointer flex items-center gap-2">
           <img src={assets.logo} alt="" />
           <div className="flex flex-col justify-center">
             <h1 className="font-bold text-xl">TaskaBot</h1>

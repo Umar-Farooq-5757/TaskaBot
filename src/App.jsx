@@ -8,12 +8,14 @@ import Community from "./pages/Community.jsx";
 import About from "./components/About.jsx";
 import { RiMenu2Fill } from "react-icons/ri";
 import { FcAbout } from "react-icons/fc";
-import './assets/prism.css'
+import "./assets/prism.css";
 
 import { useAppContext } from "./context/AppContext.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
-  const { isDark, setIsSidebarOpen, setIsAboutOpen, isAboutOpen } = useAppContext();
+  const { isDark, setIsSidebarOpen, setIsAboutOpen, isAboutOpen, user } =
+    useAppContext();
   return (
     <main
       className={`flex h-screen w-screen transition-all overflow-hidden ${
@@ -22,19 +24,30 @@ function App() {
           : "text-black bg-white"
       }`}
     >
-      <RiMenu2Fill
-        onClick={() => setIsSidebarOpen(true)}
-        className={`size-7 m-2 rounded-full md:hidden block cursor-pointer`}
-      />
+      {user ? (
+        <>
+          <RiMenu2Fill
+            onClick={() => setIsSidebarOpen(true)}
+            className={`size-7 m-2 rounded-full md:hidden block cursor-pointer`}
+          />
 
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<ChatBox />} />
-        <Route path="/credits" element={<Credits />} />
-        <Route path="/community" element={<Community />} />
-      </Routes>
-      <FcAbout onClick={()=>setIsAboutOpen(!isAboutOpen)} className=" size-7 fixed right-4 top-3 cursor-pointer" />
-      <About/>
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<ChatBox />} />
+            <Route path="/credits" element={<Credits />} />
+            <Route path="/community" element={<Community />} />
+          </Routes>
+          <FcAbout
+            onClick={() => setIsAboutOpen(!isAboutOpen)}
+            className=" size-7 fixed right-4 top-3 cursor-pointer"
+          />
+          <About />
+        </>
+      ) : (
+        <div className={`${isDark?'bg-gradient-to-b from-[#221f22] to-[#000000]':'bg-white'} flex justify-center items-center min-h-screen min-w-screen`}>
+          <Login/>
+        </div>
+      )}{" "}
     </main>
   );
 }

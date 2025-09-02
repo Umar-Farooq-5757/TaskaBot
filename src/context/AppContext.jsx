@@ -12,7 +12,7 @@ export const AppContextProvider = ({ children }) => {
 
   const [user, setUser] = useState(dummyUserData);
   const [chats, setChats] = useState(dummyChats);
-  const [selectedChat, setSelectedChat] = useState(dummyChats[1]);
+  const [selectedChat, setSelectedChat] = useState(dummyChats[3]);
   const [messages, setMessages] = useState(selectedChat?.messages || []);
 
   const value = {

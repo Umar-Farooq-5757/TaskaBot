@@ -256,7 +256,7 @@ export const dummyChats = [
     {
         "_id": Date.now(),
         "userId": "gs123456789",
-        "name": "New Chat3",
+        "name": "New Chat",
         "userName": "GreatStack",
         "messages": [],
         "createdAt": "2025-08-13T17:29:52.421Z",

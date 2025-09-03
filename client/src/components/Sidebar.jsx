@@ -8,10 +8,10 @@ import { FiSun } from "react-icons/fi";
 import { IoMoonOutline, IoCloseSharp } from "react-icons/io5";
 import "../App.css";
 import moment from "moment";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const {
     isDark,
@@ -23,6 +23,8 @@ const Sidebar = () => {
     chats,
     setChats,
     user,
+    selectedChat,
+    setSelectedChat
   } = useAppContext();
   return (
     <aside
@@ -44,7 +46,10 @@ const Sidebar = () => {
       </button>
       <section className="flex flex-col gap-5">
         {/* Logo */}
-        <div onClick={()=>navigate('/')} className="logo cursor-pointer flex items-center gap-2">
+        <div
+          onClick={() => navigate("/")}
+          className="logo cursor-pointer flex items-center gap-2"
+        >
           <img src={assets.logo} alt="" />
           <div className="flex flex-col justify-center">
             <h1 className="font-bold text-xl">TaskaBot</h1>
@@ -68,7 +73,7 @@ const Sidebar = () => {
             name=""
             id=""
             placeholder="Search chats..."
-            onChange={(e)=>setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             value={search}
           />
         </div>
@@ -77,21 +82,25 @@ const Sidebar = () => {
         {messages.length > 0 && <h2 className="text-sm my-0 ">Recent chats</h2>}
         {chats
           .filter((chat) => {
-            // Find the text to search in: either the first message content or the chat name
-            const searchText = chat.messages?.[0]?.content || chat.name || "";
-            // Return true if the search text includes the search term (case-insensitive)
-            return searchText.toLowerCase().includes(search.toLowerCase());
+            return chat.messages[0]
+              ? chat.messages[0]?.content
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              : chat.name.toLowerCase().includes(search.toLowerCase());
           })
           .map((chat, index) => {
             return (
               <div
                 key={index}
+                onClick={()=>setSelectedChat(chats.find(element => element._id === chat._id))}
                 className={`chat group relative cursor-pointer flex flex-col justify-center border ${
                   isDark ? "border-gray-800" : "border-gray-300"
                 } rounded-md py-1 pl-4`}
               >
-                <p className="title text-sm">{chat.name}</p>
-                <span className="time text-xs text-gray-500">{moment(chat.updatedAt).fromNow()}</span>
+                <p className="title text-sm">{chat.messages.length >0? chat.messages[0].content.slice(0,32):chat.name}</p>
+                <span className="time text-xs text-gray-500">
+                  {moment(chat.updatedAt).fromNow()}
+                </span>
                 <button
                   className={`${
                     isDark ? "hover:bg-gray-800" : "hover:bg-gray-200"
@@ -102,14 +111,12 @@ const Sidebar = () => {
               </div>
             );
           })}
-
-     
       </section>
 
       <section className="flex flex-col gap-4">
         {/* community images */}
         <div
-        onClick={()=>navigate('/community')}
+          onClick={() => navigate("/community")}
           className={`chat group hover:scale-105 transition-all relative cursor-pointer flex justify-start items-center border gap-2 ${
             isDark ? "border-gray-800" : "border-gray-300"
           } rounded-md py-3 px-2`}

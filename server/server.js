@@ -1,7 +1,12 @@
 import express from 'express'
 import cors from 'cors'
-const app = express()
+import connectDB from './config/db.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 const PORT = process.env.PORT || 3000
+const app = express()
+connectDB()
 
 // Middlewares
 app.use(express.json())
@@ -12,5 +17,5 @@ app.get('/',(req,res)=>{
 })
 
 app.listen(PORT, ()=>{
-    console.log('🚀 server running on port ',PORT)
+    console.log('server running on port ',PORT)
 })
